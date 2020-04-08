@@ -1,4 +1,6 @@
 import os
+import stat
+import shutil
 import sys
 import subprocess
 from os import path
@@ -10,7 +12,13 @@ def pg_format(sql: bytes):
     cmd = path.join(package_directory, "..", "bin", "perl", "pg_format")
 
     if os.environ.get("LAMBDA_TASK_ROOT") and os.environ.get("NOW_REGION") != "dev1":
-        cmd = path.join(package_directory, "..", "bin", "lambda", "pg_format")
+        src = path.join(package_directory, "..", "bin", "lambda", "pg_format")
+        cmd = path.join("/tmp", "pg_format")
+
+        if not path.exists(cmd):
+            shutil.copy(src, cmd)
+            st = os.stat(cmd)
+            os.chmod(cmd, st.st_mode | stat.S_IXUSR | stat.S_IXGRP | stat.S_IXOTH)
 
     output = ""
 
