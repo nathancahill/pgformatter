@@ -10,7 +10,10 @@ def pg_format(sql: bytes):
     cmd = path.join(package_directory, "..", "bin", "perl", "pg_format")
 
     if os.environ.get("LAMBDA_TASK_ROOT") and os.environ.get("NOW_REGION") != "dev1":
-        cmd = path.join(package_directory, "..", "bin", "lambda", "pg_format")
+        perl = path.join(package_directory, "..", "bin", "perl")
+        binary = path.join(perl, "pg_format")
+        incl = path.join(perl, "lib", "autodie")
+        cmd = ["perl", "-I", incl, binary]
 
     output = ""
 
