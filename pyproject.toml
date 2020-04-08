@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pgformatter"
-version = "0.1.4"
+version = "0.1.5"
 description = "Thin Python wrapper for pgFormatter. Compatible with AWS Lambda or any environment with Perl."
 authors = ["Nathan Cahill <nathan@nathancahill.com>"]
 include = ["bin/**/*"]
