@@ -3,7 +3,7 @@ name = "pgformatter"
 version = "0.1.5"
 description = "Thin Python wrapper for pgFormatter. Compatible with AWS Lambda or any environment with Perl."
 authors = ["Nathan Cahill <nathan@nathancahill.com>"]
-include = ["bin/**/*"]
+include = ["perl/**/*"]
 
 [tool.poetry.dependencies]
 python = "^3.6"

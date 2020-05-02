@@ -1,4 +1,3 @@
-import os
 import sys
 import re
 import subprocess
@@ -11,15 +10,10 @@ def pg_format(
     if unquote:
         sql = unquote_sql(sql)
 
-    package_directory = path.dirname(path.abspath(__file__))
-
-    cmd = path.join(package_directory, "..", "bin", "perl", "pg_format")
-
-    if os.environ.get("LAMBDA_TASK_ROOT") and os.environ.get("NOW_REGION") != "dev1":
-        perl = path.join(package_directory, "..", "bin", "perl")
-        binary = path.join(perl, "pg_format")
-        incl = path.join(perl, "lib", "autodie")
-        cmd = ["perl", "-I", incl, binary]
+    perl = path.join(path.dirname(path.abspath(__file__)), "..", "perl")
+    binary = path.join(perl, "pg_format")
+    incl = path.join(perl, "lib", "autodie")
+    cmd = ["perl", "-I", incl, binary]
 
     output = ""
 
